@@ -26,7 +26,8 @@ export default {
     methods: {
         //登陆请求  异步处理
         async handelLogin(){
-            const res = await this.$http.post('login',this.formdata)
+            const res = await this.$http.post('login',this.formdata);
+            console.log(res);
             const {
                 data: {
                     meta: {msg,status},
@@ -35,8 +36,10 @@ export default {
             } = res
             if (status === 200) {
                 localStorage.setItem('token',data.token)
+                // 编程式导航
                 this.$router.push({
-                    name: 'home'
+                    name: 'home',
+                    path: '/'
                 })
             } else {
                 this.$message.warning(msg)

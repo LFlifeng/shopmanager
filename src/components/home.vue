@@ -4,7 +4,7 @@
       <el-row>
         <el-col :span="3">
           <div class="grid-content bg-purple">
-            <img src="@/assets/logo.png" alt="图片无法显示">
+            <img src="@/assets/logo.jpg" alt="图片无法显示">
           </div>
         </el-col>
         <el-col :span="19" class="middle">
@@ -45,12 +45,12 @@ export default {
     };
   },
   beforeCreate() {
-    // if(!localStorage.getItem('token')){
-    //   this.$message.warning('请先登录！！！')
-    //   this.$router.push({
-    //     name: 'login'
-    //   })
-    // }
+    if(!localStorage.getItem('token')){
+      this.$message.warning('请先登录！！！')
+      this.$router.push({
+        name: 'login'
+      })
+    }
   },
   created(){
     this.getMenus();
@@ -84,7 +84,7 @@ export default {
   /* background-color: yellow; */
 }
 .container .header {
-  background-color: #b3c0d1;
+  background-color: #ccc;
 }
 .container .aside {
   /* background-color: blue; */
