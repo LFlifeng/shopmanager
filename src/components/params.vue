@@ -117,6 +117,7 @@ export default {
         },
         showInput() {
             this.inputVisible = true;
+            //操作DOM
             this.$nextTick(_ => {
                 this.$refs.saveTagInput.$refs.input.focus();
             });
