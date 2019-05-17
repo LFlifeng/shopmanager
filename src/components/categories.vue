@@ -123,7 +123,6 @@ export default {
   },
   methods: {
     // 编辑分类
-    
     // 添加分类 - 发送请求
     async addCate() {
       // cat_name	分类名称	不能为空  el-input v-model="form.cat_name"
