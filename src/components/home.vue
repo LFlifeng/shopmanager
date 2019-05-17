@@ -60,8 +60,8 @@ export default {
     //获取导航数据
     async getMenus(){
       const res = await this.$http.get(`menus`);
-      console.log(res);
-      console.log(res.data.data[0].path);
+//    console.log(res);
+//    console.log(res.data.data[0].path);
       this.menus = res.data.data;
     },
     //退出

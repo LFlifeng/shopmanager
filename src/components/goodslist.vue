@@ -4,7 +4,7 @@
     <!-- 搜索框 -->
     <el-row class="searchArea">
       <el-col :span="24">
-        <el-input v-model="searchValue" class="searchInput" clearable placeholder="请输入内容">
+        <el-input v-model="searchValue" class="searchInput" clearable placeholder="请输入内容" @clear="getAllUsers()">
           <el-button @click="handleSearch()" slot="append" icon="el-icon-search"></el-button>
         </el-input>
         <el-button @click="addGoods()" type="success" plain>添加商品</el-button>
@@ -183,7 +183,15 @@ export default {
       //编程式导航
       this.$router.push({ name: "goodsadd" });
     },
-
+     //点击x获取所有用户
+    getAllUsers() {
+      this.loadData();
+    },
+    //点击搜索实现搜索功能
+    handleSearch(){
+      this.pagenum = 1;
+      this.loadData();
+    },
     handleSizeChange(val) {
       // console.log(`每页 ${val} 条`)
       this.pagesize = val;
@@ -193,11 +201,6 @@ export default {
     handleCurrentChange(val) {
       // console.log(`当前页: ${val}`)
       this.pagenum = val;
-      this.loadData();
-    },
-    //点击搜索实现搜索功能
-    handleSearch(){
-      this.pagenum = 1;
       this.loadData();
     },
     // 商品编辑----发送请求

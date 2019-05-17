@@ -100,8 +100,11 @@ export default {
             inputValue: ""
         }
     },
-    created() {
+    created() {//完成以下配置：数据观测(data observer)，属性和方法的运算， watch/event 事件回调。然而，挂载阶段还没开始，$el 属性目前不可见。
         this.getGoodsCate();
+    },
+    mounted() {
+    	//el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子
     },
     methods: {
         async handleClose(attr, item){
@@ -182,7 +185,7 @@ export default {
             const res = await this.$http.get(`categories?type=3`);
             // console.log(res);
             this.options = res.data.data;
-            // console.log(this.options);
+               console.log(this.options);
         }
     }
 }
@@ -210,5 +213,11 @@ export default {
   width: 90px;
   margin-left: 10px;
   vertical-align: bottom;
+}
+.el-form-item {
+	margin-bottom: 4px !important;
+}
+.form {
+	height: 100% !important;
 }
 </style>

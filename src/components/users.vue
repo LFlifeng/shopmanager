@@ -99,6 +99,7 @@
                 <el-button type="primary" @click="addUser()">确 定</el-button>
             </div>
         </el-dialog>
+        <!-- 编辑 -->
         <el-dialog title="编辑用户" :visible.sync="dialogFormVisibleEdit">
             <el-form :model="form">
                 <el-form-item label="用户名" :label-width="formLabelWidth">
@@ -116,6 +117,7 @@
                 <el-button type="primary" @click="editUser()">确 定</el-button>
             </div>
         </el-dialog>
+        <!-- 分配 -->
         <el-dialog title="分配角色" :visible.sync="dialogFormVisibleRole">
             <el-form>
                 <el-form-item label="用户名" :label-width="formLabelWidth">{{currUsername}}</el-form-item>

@@ -122,6 +122,8 @@ export default {
     this.getGoodsCate();
   },
   methods: {
+    // 编辑分类
+    
     // 添加分类 - 发送请求
     async addCate() {
       // cat_name	分类名称	不能为空  el-input v-model="form.cat_name"
@@ -158,7 +160,6 @@ export default {
       // 获取两级分类的数据
       const res = await this.$http.get(`categories?type=2`);
       this.caslist = res.data.data;
-
       this.dialogFormVisibleAdd = true;
     },
     // 获取所有分类

@@ -9,7 +9,7 @@
             </el-col>
         </el-row>
         <!-- 表格  角色列表-->
-        <el-table :data="rights" style="width: 100%" height="300px">
+        <el-table :data="rights" style="width: 100%">
             <el-table-column type="expand" width="260">
                 <!--展开后的内容 角色列表 -->
                 <template slot-scope="scope">
@@ -50,10 +50,10 @@
         </el-table>
         <!-- 分配权限  弹出框 -->
         <el-dialog title="分配权限" :visible.sync="dialogVisible" width="50%">
-        <!-- 树形结构
-        :default-expanded-keys="[2, 3]"
+            <!-- 树形结构
+            :default-expanded-keys="[2, 3]"
             :default-checked-keys="[5]"
-        -->
+            -->
             <el-tree
                 ref="tree"
                 default-expand-all
@@ -153,5 +153,10 @@ export default {
 .btn {
     margin-top: 10px;
 }
-
+.el-tag {
+    margin-bottom: 6px;
+}
+.el-tag--warning {
+    margin-left: 4px;
+}
 </style>
