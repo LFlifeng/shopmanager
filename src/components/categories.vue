@@ -8,7 +8,30 @@
         <el-button type="success" @click="showAddGoodsCate()">添加分类</el-button>
       </el-col>
     </el-row>
-
+    <!-- 编辑分类对话框 -->
+    <el-dialog title="编辑分类" :visible.sync="dialogFormVisibleEdit">
+      <el-form :model="form">
+        <el-form-item label="分类名称" :label-width="formLabelWidth">
+          <el-input v-model="form.cat_name" autocomplete="off"></el-input>
+        </el-form-item>
+        <!-- 级联选择器 (表单元素) -->
+        <el-form-item label="分类" :label-width="formLabelWidth">
+          {{selectedOptions}}
+          <el-cascader
+            expand-trigger="hover"
+            change-on-select
+            clearable
+            :options="caslist"
+            v-model="selectedOptions"
+            :props="defaultProp"
+          ></el-cascader>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisibleAdd = false">取 消</el-button>
+        <el-button type="primary" @click="addCate()">确 定</el-button>
+      </div>
+    </el-dialog>
     <!-- 添加分类的对话框 -->
     <el-dialog title="添加分类" :visible.sync="dialogFormVisibleAdd">
       <el-form :model="form">
@@ -57,22 +80,27 @@
           <span v-else-if="scope.row.cat_level===2">三级</span>
         </template>
       </el-table-column>
-
       <el-table-column label="是否有效">
         <template slot-scope="scope">
           <span v-if="scope.row.cat_deleted===false">有效</span>
           <span v-else-if="scope.row.cat_deleted===true">无效</span>
         </template>
       </el-table-column>
-
+      <!-- 每一层级都有操作选项 -->
       <el-table-column label="操作" width="180">
         <template slot-scope="scope">
-          <el-button type="primary" icon="el-icon-edit" circle size="mini" plain></el-button>
+          <el-button
+            type="primary"
+            icon="el-icon-edit"
+            circle
+            size="mini"
+            plain
+            @click="showEditGoodsCate()"
+          ></el-button>
           <el-button type="danger" icon="el-icon-delete" circle size="mini" plain></el-button>
         </template>
       </el-table-column>
     </el-table>
-
     <!-- 分页 -->
     <el-pagination
       @size-change="handleSizeChange"
@@ -102,6 +130,7 @@ export default {
       pagesize: 10,
       total: 1,
       dialogFormVisibleAdd: false,
+      dialogFormVisibleEdit: false,
       form: {
         cat_pid: -1,
         cat_name: "",
@@ -122,7 +151,13 @@ export default {
     this.getGoodsCate();
   },
   methods: {
-    // 编辑分类
+    // 编辑分类----打开对话框
+    async showEditGoodsCate() {
+      const res = await this.$http.get(`categories?type=2`);
+      this.caslist = res.data.data;
+      console.log(this.caslist)
+      this.dialogFormVisibleEdit = true;
+    },
     // 添加分类 - 发送请求
     async addCate() {
       // cat_name	分类名称	不能为空  el-input v-model="form.cat_name"
