@@ -5,14 +5,14 @@
       <el-table-column type="index" label="#" width="40"></el-table-column>
       <el-table-column prop="order_number" label="订单编号" width="240"></el-table-column>
       <el-table-column prop="order_price" label="订单价格"></el-table-column>
-      <el-table-column prop="order_pay" label="是否付款" width="80">
+      <el-table-column prop="order_pay" label="是否付款" width="100">
         <template slot-scope="scope">
           <el-tag v-if="scope.row.order_pay==='0'">已付款</el-tag>
           <el-tag type="danger" v-if="scope.row.order_pay==='1'">未付款</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="is_send" label="是否发货" width="100"></el-table-column>
-      <el-table-column label="下单时间" width="90">
+      <el-table-column label="下单时间" width="100">
         <template slot-scope="scope">{{scope.row.create_time|fmtDate}}</template>
       </el-table-column>
       <el-table-column label="操作" width="180">
@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       list: [],
-      dialogFormVisible: true,
+      dialogFormVisible: false,
       form: {
         address: ""
       },

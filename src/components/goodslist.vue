@@ -4,8 +4,8 @@
     <!-- 搜索框 -->
     <el-row class="searchArea">
       <el-col :span="24">
-        <el-input v-model="searchValue" class="searchInput" clearable placeholder="请输入内容">
-          <el-button @click="handleSearch" slot="append" icon="el-icon-search"></el-button>
+        <el-input v-model="searchValue" class="searchInput" clearable placeholder="请输入内容" @clear="getAllUsers()">
+          <el-button @click="handleSearch()" slot="append" icon="el-icon-search"></el-button>
         </el-input>
         <el-button @click="addGoods()" type="success" plain>添加商品</el-button>
       </el-col>
@@ -52,7 +52,7 @@
       :total="total"
     ></el-pagination>
     <!-- 编辑商品弹出层 -->
-    <el-dialog title="编辑商品" :visible.sync="dialogFormVisibleEdit" >
+    <el-dialog title="编辑商品" :visible.sync="dialogFormVisibleEdit">
       <el-steps :active="1*active" align-center>
         <el-step title="基本信息"></el-step>
         <el-step title="商品参数"></el-step>
@@ -61,7 +61,7 @@
         <el-step title="商品内容"></el-step>
       </el-steps>
       <!-- tabs标签 -->
-      <el-form class="form" :model="form" label-position="top" >
+      <el-form class="form" :model="form" label-position="top">
         <el-tabs tab-position="left" v-model="active" @tab-click="changeTab()">
           <el-tab-pane name="1" label="基本信息">
             <el-form-item label="商品名称">
@@ -82,7 +82,7 @@
                 expand-trigger="hover"
                 :options="options"
                 :props="defaultProp"
-                @change="handleChange"
+                @change="handleChange()"
                 v-model="selectedOptions"
               ></el-cascader>
             </el-form-item>
@@ -111,10 +111,7 @@
                 v-model="form.goods_small_logo"
               >
                 <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip" >
-                  只能上传jpg/png文件，且不超过500kb
-                  
-                </div>
+                <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
               </el-upload>
             </el-form-item>
           </el-tab-pane>
@@ -136,7 +133,7 @@
 import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
-import {quillEditor} from 'vue-quill-editor';
+import { quillEditor } from "vue-quill-editor";
 export default {
   components: {
     quillEditor
@@ -186,7 +183,15 @@ export default {
       //编程式导航
       this.$router.push({ name: "goodsadd" });
     },
-
+     //点击x获取所有用户
+    getAllUsers() {
+      this.loadData();
+    },
+    //点击搜索实现搜索功能
+    handleSearch(){
+      this.pagenum = 1;
+      this.loadData();
+    },
     handleSizeChange(val) {
       // console.log(`每页 ${val} 条`)
       this.pagesize = val;
@@ -198,15 +203,17 @@ export default {
       this.pagenum = val;
       this.loadData();
     },
-    handleSearch() {},
     // 商品编辑----发送请求
     async editProduct() {
       // console.log(this.form)
-      const res = await this.$http.put(`goods/${this.form.goods_id}`,this.form);
+      const res = await this.$http.put(
+        `goods/${this.form.goods_id}`,
+        this.form
+      );
       const {
-        meta: {msg,status}
+        meta: { msg, status }
       } = res.data;
-      if(status === 200) {
+      if (status === 200) {
         this.dialogFormVisibleEdit = false;
         this.loadData();
       } else {
@@ -217,12 +224,12 @@ export default {
     async Edit(product) {
       this.dialogFormVisibleEdit = true;
       const res = await this.$http.get(`goods/${product.goods_id}`);
-      console.log(res)
+      // console.log(res);
       const {
-        meta: {msg,status},
+        meta: { msg, status },
         data
       } = res.data;
-      if(status === 200) {
+      if (status === 200) {
         this.form = data;
       }
     },
@@ -304,14 +311,17 @@ export default {
           this.$message.info("已取消删除");
         });
     },
+    
     // 渲染表格数据
     async loadData() {
       const { data: resData } = await this.$http.get(
         `goods?pagenum=${this.pagenum}&pagesize=${this.pagesize}`
       );
+      // console.log(this)
       this.total = resData.data.total;
       this.list = resData.data.goods;
       // console.log(this.list);
+      // console.log(this.total)
     }
   }
 };
