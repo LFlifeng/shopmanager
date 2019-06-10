@@ -73,6 +73,7 @@
 
 <script>
 export default {
+    // name: '',
     data(){
         return {
             dialogVisible: false,
