@@ -8,7 +8,7 @@
           </div>
         </el-col>
         <el-col :span="19" class="middle">
-          <h2>电商后台管理系统</h2>
+          <h2>后台管理系统</h2>
         </el-col>
         <el-col :span="1" class="loginout">
           <a href @click.prevent="handleLoginout()">退出</a>
