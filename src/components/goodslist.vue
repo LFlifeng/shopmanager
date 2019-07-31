@@ -296,7 +296,7 @@ export default {
       })
         .then(async () => {
           const res = await this.$http.delete(`goods/${product.goods_id}`);
-          // console.log(res)
+          console.log(res)
           const {
             meta: { msg, status }
           } = res.data;
