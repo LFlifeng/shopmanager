@@ -39,7 +39,7 @@
                             <!-- 动态el-tag编辑 -->
                             <el-tag
                                 v-for="(item,i) in scope.row.attr_vals"
-                                :key="item.attr_id"
+                                :key="i"
                                 closable
                                 :disable-transitions="false"
                                 @close="handleClose(scope.row,item)"

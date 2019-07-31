@@ -88,7 +88,7 @@
             </el-form-item>
           </el-tab-pane>
           <el-tab-pane name="2" label="商品参数">
-            <el-form-item :label="item1.attr_name" v-for="(item1,i) in arrDy" :key="item1.attr_id">
+            <el-form-item :label="item1.attr_name" v-for="(item1,i) in arrDy" :key="i">
               <!-- 复选框组 -->
               <el-checkbox-group v-model="item1.attr_vals">
                 <el-checkbox border="" v-for="(item2,i) in item1.attr_vals" :key="i" :label="item2"></el-checkbox>
@@ -96,7 +96,7 @@
             </el-form-item>
           </el-tab-pane>
           <el-tab-pane name="3" label="商品属性">
-            <el-form-item :label="item.attr_name" v-for="(item,i) in arrStatic" :key="item.attr_id">
+            <el-form-item :label="item.attr_name" v-for="(item,i) in arrStatic" :key="i">
               <el-input v-model="item.attr_vals"></el-input>
             </el-form-item>
           </el-tab-pane>
