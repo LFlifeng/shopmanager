@@ -151,11 +151,12 @@ export default {
     this.getGoodsCate();
   },
   methods: {
+
     // 编辑分类----打开对话框
     async showEditGoodsCate() {
       const res = await this.$http.get(`categories?type=2`);
       this.caslist = res.data.data;
-      console.log(this.caslist)
+      // console.log(this.caslist)
       this.dialogFormVisibleEdit = true;
     },
     // 添加分类 - 发送请求
@@ -201,7 +202,7 @@ export default {
       const res = await this.$http.get(
         `categories?type=3&pagenum=${this.pagenum}&pagesize=${this.pagesize}`
       );
-      console.log(res);
+      // console.log(res);
       this.list = res.data.data.result;
       // console.log(this.list);
 
