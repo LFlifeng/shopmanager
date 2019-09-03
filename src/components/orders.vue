@@ -79,11 +79,11 @@ export default {
       // console.log(res);
       this.list = res.data.data.goods;
     },
-    showEditdia() {
+    showEditdia(product) {
       // 需要给级联配置数据 (省市区)
       // 导入省市区数据 -> 给级联选择器使用catlist
+      
       this.catlist = catlist;
-
       this.dialogFormVisible = true;
     }
   }
