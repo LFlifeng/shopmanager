@@ -222,14 +222,17 @@ export default {
     },
     //用户编辑---发送请求
     async editUser() {
-      //console.log(this.form)
+      // console.log(this.form)
       const res = await this.$http.put(`users/${this.form.id}`, this.form);
       const {
         meta: { msg, status }
       } = res.data;
+      console.log(res)
       if (status === 200) {
         this.dialogFormVisibleEdit = false;
         this.getTableData();
+        // console.log(this.form.username)
+        this.form.username = this.form.username;
       } else {
         this.$message.warning(msg);
       }
