@@ -16,6 +16,7 @@ Http.install = function (Vue, options) {
   }, function (error) {
     return Promise.reject(error);
   });
+  //请求拦截器  http response拦截器
   Axios.interceptors.response.use(function (config) {
     return config;
   }, function (error) {
