@@ -16,7 +16,7 @@ Http.install = function (Vue, options) {
     return Promise.reject(error);
   });
 
-    // 4. 添加实例方法
+  // 4. 添加实例方法
   Vue.prototype.$http = Axios
 }
 export default Http

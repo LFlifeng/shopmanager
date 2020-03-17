@@ -9,7 +9,7 @@ import MyBrand from '@/components/cusBrand.vue'
 import 'element-ui/lib/theme-chalk/index.css'
 import "@/assets/index.css"
 import moment from 'moment'
-Vue.config.productionTip = false
+Vue.config.productionTip = false //消息提示的环境配置，设置为开发环境或生产环境
 Vue.use(Http)
 Vue.use(ElementUI)
 //注册全局组件

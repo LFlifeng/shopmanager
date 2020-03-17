@@ -33,7 +33,7 @@ export default {
                     meta: {msg,status},
                     data
                 }
-            } = res
+            } = res; //对象解构赋值
             if (status === 200) {
                 localStorage.setItem('token',data.token)
                 // 编程式导航
